@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Routing\Route as RoutingRoute;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,11 @@ Route::get('/', function () {
 Route::get('home', function () {
     return view('home');
 });
+
+Route::prefix('categories')->group(function(){
+    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
+
+    // Route::get('/create', 'CategoryController@create')->name('categories.create');
+});
+
+Route::get('/create1', 'CategoryController@create');
