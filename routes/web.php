@@ -21,12 +21,11 @@ Route::get('/', function () {
 
 Route::get('home', function () {
     return view('home');
-});
+})->name('home');
 
 Route::prefix('categories')->group(function(){
+    Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
-
-    // Route::get('/create', 'CategoryController@create')->name('categories.create');
 });
 
 Route::get('/create1', 'CategoryController@create');
