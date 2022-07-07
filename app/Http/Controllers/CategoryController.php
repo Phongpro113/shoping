@@ -2,33 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\components\Recusive;
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
+    private $category;
+    public function __construct(Category $category)
+    {
+        $this->category = $category;
+    }
+
     public function index()
     {
-        return view('category.index');
+        $data = $this->category->latest()->paginate(5);
+//        $id = $this->category->all()->getQueueableIds();
+//        $name = $this->category->pluck('name');
+
+        return view('admin.category.index', compact('data'));
     }
 
-    public $html;
+    public function getCategory($parentId, $parent) {
+        $data = $this->category->all();
+        $recusive = new Recusive($data);
+        $html = $recusive->categoryRecusive($parentId, '', $parent);
+        return $html;
+    }
+
     public function create()
     {
-        $this->recusive(0, '');
-        $html = $this->html;
-        return view('category.add', compact('html'));
+        $html = $this->getCategory($parentId='', null);
+        return view('admin.category.add', compact('html'));
     }
 
-    public function recusive($id, $text){
-        $data = Category::all();
-        foreach ($data as $value){
-            if ($value['parent_id'] == $id){
-                $this->html .= "<option>". $text. $value['name'] ."</option>";
-                $text .= '-';
-                $this->recusive($value['id'], $text);
-            }
+    public function store(Request $request)
+    {
+        $data = $this->category->create([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+            'slug' => Str::slug('Anh Phong', '-')
+        ]);
+        return redirect()->route('categories.index');
+    }
 
-        }
+    public function edit($id) {
+        $data = $this->category->find($id);
+        $html = $this->getCategory($parentId=0, $data->parent_id);
+        return view('admin.category.edit', compact('data', 'html'));
+    }
+
+    public function update($id, Request $request) {
+        $data = $this->category->find($id)->update([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+            'slug' => Str::slug('Anh Phong', '-')
+        ]);
+
+        return redirect()->route('admin.categories.index');
+    }
+
+    public function delete($id) {
+        $data = $this->category->find($id)->delete();
+        return redirect()->route('admin.categories.index');
     }
 }
