@@ -10,7 +10,7 @@ class MenuRecusive {
 
     function menuRecusive($parentId, $id = 0,$text='') {
         foreach($this->data as $value) {
-            if($value['id'] == $parentId) {
+            if(!empty($parentId) && $value['id'] == $parentId) {
                 $this->html .= "<option selected value='$value->id'>".$text.$value['name']."</option>";
             } else {
                 if ($value['parent_id'] == $id) {

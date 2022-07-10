@@ -5,7 +5,9 @@
 @endsection
 
 @section('css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{asset('vendors/select2/select2.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('admins/products/add/add.css')}}" rel="stylesheet" />
+{{--    <script src="{{asset('admins/products/add/add.js')}}"></script>--}}
 @endsection
 
 @section('content')
@@ -36,26 +38,32 @@
 
                             <div class="form-group">
                                 <label>nhập tags cho sản phẩm</label>
-                                <select class="form-control tags_select_choose" multiple="multiple">
+                                <select class="form-control tags_select_choose" name="tags[]" multiple="multiple">
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">chi tiết sản phẩm</label>
-                                <textarea class="form-control" rows="3" name="content"></textarea>
+                                <label for="exampleFormControlTextarea1 ">chi tiết sản phẩm</label>
+                                <textarea class="form-control tinymce_editor_init" rows="3" name="contents"></textarea>
                             </div>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">mã sản phẩm</label>
                                 <input type="text" class="form-control" name="user_id" placeholder="Nhập mã sản phẩm">
                             </div>
 
-                            <div class="col-md-10">
-                                <label for="exampleInputEmail1">ảnh sản phẩm</label>
-                                <input type="file" multiple class="form-control" name="image_path[]" placeholder="chọn ảnh sản phẩm">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">ảnh đại diện sản phẩm</label>
+                                <input type="file" multiple class="form-control-file" name="feature_image_path" placeholder="chọn ảnh sản phẩm">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">ảnh chi tiết sản phẩm</label>
+                                <input type="file" multiple class="form-control-file" name="image_path[]" placeholder="chọn ảnh sản phẩm">
                             </div>
 
                             <label>Chọn danh mục</label>
-                            <select class="form-control select2_init" name="parent_id">
+                            <select class="form-control select2_init" name="category_id">
                                 {!! $html !!}
                             </select>
 
@@ -71,18 +79,9 @@
 @endsection
 
 @section('js')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(function () {
-            $(".tags_select_choose").select2({
-                tags: true,
-                tokenSeparators: [',', ' ']
-            })
-            $(".select2_init").select2({
-                placeholder: "Chọn danh mục",
-                allowClear: true
-            })
+    <script src="{{asset('vendors/select2/select2.min.js')}}"></script>
+    <script src="{{asset('admins/products/add/add.js')}}"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+{{--    <script src="https://cdn.tiny.cloud/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>--}}
 
-        })
-    </script>
 @endsection

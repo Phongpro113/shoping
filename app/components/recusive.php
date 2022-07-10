@@ -16,7 +16,7 @@ class Recusive {
                 if ($value['parent_id'] ==  $parentid) {
                     $flag = $value['id'] ==  $parent;
                     $this->html .= "<option ". ($flag ? 'selected' : '') . " value=".$value['id'].">". $text.$value['name'] ."</option>";
-                    self::categoryRecusive($value['id'], $text.'-');
+                    self::categoryRecusive($value['id'], $text.'-', $parent);
                 }
         }
         return $this->html;
