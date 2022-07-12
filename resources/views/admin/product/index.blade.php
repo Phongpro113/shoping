@@ -41,7 +41,7 @@
                                         <p>{{$value->name}}</p>
                                     </td>
                                     <td>
-                                        <p>{{$value->price}}</p>
+                                        <p>{{number_format($value->price)}}</p>
                                     </td>
                                     <td>
                                             <p><img class="product_image_150_100" src="{{$value->feature_image_path}}" alt="hinh anh"></p>
@@ -54,8 +54,8 @@
                                         </p>
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-default">Edit</a>
-                                        <a href="" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                        <a href="{{route('product.edit', ['id' => $value->id])}}" class="btn btn-default">Edit</a>
+                                        <a href="{{route('product.delete', ['id' => $value->id])}}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

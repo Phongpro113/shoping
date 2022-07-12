@@ -30,7 +30,7 @@ class AdminProductController extends Controller
     }
 
     public function index() {
-        $data = $this->product->paginate(5);
+        $data = $this->product->latest()->paginate(5);
 
         return view('admin.product.index', compact('data'));
     }
@@ -51,7 +51,6 @@ class AdminProductController extends Controller
     public function store(Request $request) {
         try {
             DB::beginTransaction();
-
             $dataProductCreate = [
                 'name' => $request->name,
                 'price' => $request->price,
@@ -92,11 +91,18 @@ class AdminProductController extends Controller
             }
 
             $product->tags()->attach($tagIds);
+
             DB::commit();
+            return redirect()->route('product.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             log::error('Message' . $exception->getMessage() . 'Line : ' .  $exception->getLine());
         }
-        return redirect()->route('product.index');
+    }
+    public function edit($id) {
+        $product = $this->product->find($id);
+        $category = $this->getCategory(0, $product->category->id);
+//        dd($data);
+        return view('admin.product.edit', compact('product', 'category'));
     }
 }
