@@ -3,6 +3,9 @@
 @section('title')
     <title>Sản phẩm </title>
 @endsection
+@section('css')
+    <link rel="stylesheet" href="{{asset("admins/products/index/list.css")}}">
+@endsection
 
 @section('content')
     <div class="content-wrapper">
@@ -29,32 +32,36 @@
                             </tr>
                             </thead>
                             <tbody>
-{{--                            @foreach($data as $value)--}}
+                            @foreach($data as $value)
                                 <tr>
                                     <th scope="row">
-                                        <p>1</p>
+                                        <p>{{$value->id}}</p>
                                     </th>
                                     <td>
-                                        <p>Iphone 4</p>
+                                        <p>{{$value->name}}</p>
                                     </td>
                                     <td>
-                                        <p><img src="" alt=""></p>
+                                        <p>{{$value->price}}</p>
                                     </td>
                                     <td>
-                                        <p>2.400.000</p>
+                                            <p><img class="product_image_150_100" src="{{$value->feature_image_path}}" alt="hinh anh"></p>
                                     </td>
                                     <td>
-                                        <p>Điện thoại</p>
+                                        <p>
+                                            @if(!empty($value->category->name))
+                                                {{$value->name}}
+                                            @endif
+                                        </p>
                                     </td>
                                     <td>
                                         <a href="" class="btn btn-default">Edit</a>
                                         <a href="" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                                     </td>
                                 </tr>
-{{--                            @endforeach--}}
+                            @endforeach
                             </tbody>
-
                         </table>
+                        {{ $data->links() }}
                     </div>
                 </div>
             </div>

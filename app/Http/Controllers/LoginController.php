@@ -21,7 +21,6 @@ class LoginController extends Controller
     }
 
     public function checkLogin(Request $request) {
-//        dd(bcrypt('123'));
         $arr = [
             'email' => $request->email,
             'password' => $request->password,
