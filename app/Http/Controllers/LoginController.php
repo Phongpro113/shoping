@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use function Illuminate\Support\Facades\Mail;
@@ -14,6 +15,17 @@ class LoginController extends Controller
         if (Auth::check()) {
             return Redirect::route('home');
         }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return view('login');
     }
 
     public function index() {
@@ -31,7 +43,7 @@ class LoginController extends Controller
         if (Auth::attempt($arr, $checkbox)) {
             return Redirect()->route('home');
         } else {
-            return Redirect::route('login');
+            return back()->withInput()->with('mess', 'Tài khoản hoặc mật khẩu không chính xác');
         }
 
     }

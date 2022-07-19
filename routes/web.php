@@ -20,12 +20,13 @@ use Symfony\Component\Routing\Route as RoutingRoute;
 
 Route::get('/admin', [LoginController::class, 'index'])->name('login');
 Route::post('/admin', [LoginController::class, 'checkLogin'])->name('checkLogin');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('home', function () {
     return view('home');
-})->name('home');
+})->name('home')->middleware('auth');
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->middleware('auth')->group(function(){
     Route::prefix('categories')->group(function(){
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');

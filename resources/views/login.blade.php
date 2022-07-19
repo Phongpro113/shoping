@@ -27,6 +27,9 @@
                         <input type="checkbox" class="custom-control-input" id="item_checkbox" name="item_checkbox" value="option1">
                     <span class="custom-control-label">&nbsp;Remember Me</span>
                 </label>
+                @if(session('mess'))
+                    <div class="" style="color: red !important;">{{session('mess')}}</div>
+                @endif
                 <div class="alert(content)"></div>
                 <button class="button login__submit">
                     <span class="button__text">Log In Now</span>
