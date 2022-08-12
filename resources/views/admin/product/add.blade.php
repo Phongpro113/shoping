@@ -25,6 +25,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
+                        @if(session('message'))
+                            <div style="color: red !important;">{{session('message')}}</div>
+                        @endif
                         <form action="{{route("product.store")}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">

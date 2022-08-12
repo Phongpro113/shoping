@@ -25,7 +25,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        <form action="{{route("product.store")}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route("product.update", ['id'=>$product->id])}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">tên sản phẩm</label>
@@ -40,6 +40,9 @@
                             <div class="form-group">
                                 <label>nhập tags cho sản phẩm</label>
                                 <select class="form-control tags_select_choose" name="tags[]" multiple="multiple">
+                                    @foreach($product->tags as $value)
+                                        <option value="{{ $value->id }}" selected>{{ $value->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -57,12 +60,24 @@
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">ảnh đại diện sản phẩm</label>
-                                <input type="file" multiple class="form-control-file" name="feature_image_path" placeholder="chọn ảnh sản phẩm">
+                                <input type="file" multiple class="form-control-file" name="feature_image_path"
+                                       placeholder="chọn ảnh sản phẩm">
+                                <div class="col-md-4 feature_image_container">
+                                    <img class="feature_image" src="{{$product->feature_image_path}}" alt="avt">
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">ảnh chi tiết sản phẩm</label>
-                                <input type="file" multiple class="form-control-file" name="image_path[]" placeholder="chọn ảnh sản phẩm">
+                                <input type="file" multiple class="form-control-file" name="image_path[]"
+                                       placeholder="chọn ảnh sản phẩm" >
+                                <div class="col-md-12 container_image_detail ">
+                                    @foreach($product->productImage as $value)
+                                    <div class="col-md-3">
+                                        <img class="image_detail" src="{{ $value->image_path }}" alt="">
+                                    </div>
+                                    @endforeach
+                                </div>
                             </div>
 
                             <label>Chọn danh mục</label>

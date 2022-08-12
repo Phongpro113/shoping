@@ -28,10 +28,9 @@ class AdminProductController extends Controller
         $this->tag = $tag;
         $this->productTag = $productTag;
     }
-
+    // ->category->name    //->latest()->paginate(5)
     public function index() {
-        $data = $this->product->latest()->paginate(5);
-
+        $data = $this->product->paginate(5);
         return view('admin.product.index', compact('data'));
     }
 
@@ -43,7 +42,6 @@ class AdminProductController extends Controller
     }
 
     public function create($parentId = '', $parent = null) {
-
         $html = $this->getCategory($parentId, $parent);
         return view('admin.product.add', compact('html'));
     }
@@ -97,12 +95,27 @@ class AdminProductController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
             log::error('Message' . $exception->getMessage() . 'Line : ' .  $exception->getLine());
+            return back()->withInput()->with('message', 'thiếu thông tin');
         }
     }
     public function edit($id) {
         $product = $this->product->find($id);
         $category = $this->getCategory(0, $product->category->id);
-//        dd($data);
         return view('admin.product.edit', compact('product', 'category'));
     }
+
+    public function update($id, Request $request) {
+        $product = $this->product->find($id);
+        dd($request->name);
+        $product->update([
+           'name' =>  $product->name,
+        ]);
+        dd(0);
+    }
+
+//    public function delete($id) {
+//        $product = $this->product->find($id)->delete();
+//        $category = $this->getCategory(0, $product->category->id);
+//        return view('admin.product.edit', compact('product', 'category'));
+//    }
 }

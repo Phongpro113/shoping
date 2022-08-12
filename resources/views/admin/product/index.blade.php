@@ -49,7 +49,7 @@
                                     <td>
                                         <p>
                                             @if(!empty($value->category->name))
-                                                {{$value->name}}
+                                                {{$value->category->name}}
                                             @endif
                                         </p>
                                     </td>
@@ -61,10 +61,11 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $data->links() }}
+                        {{ $data->links('vendor.pagination.bootstrap-4') }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
