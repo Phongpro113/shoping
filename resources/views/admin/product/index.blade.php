@@ -4,9 +4,12 @@
     <title>Sản phẩm </title>
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{asset("admins/products/index/list.css")}}">
+    <link rel="stylesheet" href="{{ asset("admins/products/index/list.css") }}">
 @endsection
-
+@section('js')
+    <script src="{{ asset('vendors/sweetAlert2/sweetalert2@11.js') }}"></script>
+    <script src="{{ asset("admins/products/index/list.js") }}"></script>
+@endsection
 @section('content')
     <div class="content-wrapper">
         @include('partials.content-header', [
@@ -55,7 +58,10 @@
                                     </td>
                                     <td>
                                         <a href="{{route('product.edit', ['id' => $value->id])}}" class="btn btn-default">Edit</a>
-                                        <a href="{{route('product.delete', ['id' => $value->id])}}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                        <a href=""
+                                           data-url="{{ route('product.delete', ['id'=> $value->id]) }}"
+                                           class="btn btn-danger action_delete"
+                                           >Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

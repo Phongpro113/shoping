@@ -41,7 +41,7 @@
                                 <label>nhập tags cho sản phẩm</label>
                                 <select class="form-control tags_select_choose" name="tags[]" multiple="multiple">
                                     @foreach($product->tags as $value)
-                                        <option value="{{ $value->id }}" selected>{{ $value->name }}</option>
+                                        <option value="{{ $value->name }}" selected>{{ $value->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,6 +55,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">mã sản phẩm</label>
                                 <input type="text" class="form-control" name="user_id" placeholder="Nhập mã sản phẩm"
+                                value="{{$product->user_id}}"
                                 >
                             </div>
 
