@@ -1,6 +1,7 @@
 function actionDelete(event) {
     event.preventDefault();
     let urlRequest = $(this).data('url');
+    console.log(urlRequest)
     let that = $(this);
     Swal.fire({
         title: 'Are you sure?',
@@ -27,7 +28,6 @@ function actionDelete(event) {
                     console.log(data);
                },
                error: function () {
-
                }
            })
         }

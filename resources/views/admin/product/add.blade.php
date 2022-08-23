@@ -19,7 +19,6 @@
     'key' => 'Add'
 ])
     <!-- /.content-header -->
-
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
@@ -32,11 +31,28 @@
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Thêm sản phẩm</label>
-                                <input type="text" class="form-control" name="name" placeholder="Nhập tên sản phẩm">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nhập tên sản phẩm">
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+                            <div class="form-group">
+                                <label>Chọn danh mục</label>
+                                <select class="form-control select2_init" name="category_id">
+                                    <option value=""> Chọn danh mục </option>
+                                    {!! $html !!}
+                                </select>
+                                @error('category_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Giá sản phẩm</label>
                                 <input type="text" class="form-control" name="price" placeholder="Nhập giá sản phẩm">
+                                @error('price')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
@@ -48,6 +64,9 @@
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1 ">chi tiết sản phẩm</label>
                                 <textarea class="form-control tinymce_editor_init" rows="3" name="contents"></textarea>
+                                @error('contents')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
@@ -57,7 +76,7 @@
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">ảnh đại diện sản phẩm</label>
-                                <input type="file" multiple class="form-control-file" name="feature_image_path" placeholder="chọn ảnh sản phẩm">
+                                <input type="file" class="form-control-file" name="feature_image_path" placeholder="chọn ảnh sản phẩm">
                             </div>
 
                             <div class="form-group">
@@ -65,10 +84,7 @@
                                 <input type="file" multiple class="form-control-file" name="image_path[]" placeholder="chọn ảnh sản phẩm">
                             </div>
 
-                            <label>Chọn danh mục</label>
-                            <select class="form-control select2_init" name="category_id">
-                                {!! $html !!}
-                            </select>
+
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

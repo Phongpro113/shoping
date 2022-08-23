@@ -15,7 +15,7 @@ class MenuRecusive {
             } else {
                 if ($value['parent_id'] == $id) {
                     $this->html .= "<option value='$value->id'>" . $text . $value['name'] . "</option>";
-                    $this->menuRecusive($parentId, $value['id'], $text . '-');
+                    // $this->menuRecusive($parentId, $value['id'], $text . '-');
                 }
             }
         }
