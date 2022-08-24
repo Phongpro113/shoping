@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Routing\Route;
@@ -31,7 +32,7 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function checkLogin(Request $request) {
+    public function checkLogin(LoginRequest $request) {
         $arr = [
             'email' => $request->email,
             'password' => $request->password,

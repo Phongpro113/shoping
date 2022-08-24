@@ -6,10 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('styles.css')}}">
+
 </head>
-<body>
+<body onload="input()">
 <div class="container">
     <div class="screen">
         <div class="screen__content">
@@ -17,11 +18,17 @@
                 @csrf
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input type="text" class="login__input" name="email" placeholder="User name / Email">
+                    <input type="text" class="login__input" name="email" placeholder="User name / Email" id="input">
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-lock"></i>
                     <input type="password" class="login__input" name="password" placeholder="Password">
+                    @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <label class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="item_checkbox" name="item_checkbox" value="option1">
@@ -55,6 +62,11 @@
     </div>
 </div>
 </body>
+<script>
+    function input() {
+        document.getElementById("input").focus();
+    }
+</script>
 </html>
 <?php
 
