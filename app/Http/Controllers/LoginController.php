@@ -12,12 +12,6 @@ use function Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
-    public function loginAdmin() {
-        if (Auth::check()) {
-            return Redirect::route('home');
-        }
-    }
-
     public function logout(Request $request)
     {
         Auth::logout();
@@ -29,6 +23,9 @@ class LoginController extends Controller
     }
 
     public function index() {
+        if (Auth::check()) {
+            return view('home');
+        }
         return view('login');
     }
 
@@ -45,6 +42,5 @@ class LoginController extends Controller
         } else {
             return back()->withInput()->with('mess', 'Tài khoản hoặc mật khẩu không chính xác');
         }
-
     }
 }

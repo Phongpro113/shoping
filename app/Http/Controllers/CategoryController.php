@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\components\Recusive;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+
 class CategoryController extends Controller
 {
     private $category;
@@ -16,11 +18,11 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $data = $this->category->latest()->paginate(5);
+        $category = $this->category->latest()->paginate(5);
 //        $id = $this->category->all()->getQueueableIds();
 //        $name = $this->category->pluck('name');
 
-        return view('admin.category.index', compact('data'));
+        return view('admin.category.index', compact('category'));
     }
 
     public function getCategory($parentId, $parent) {
@@ -63,7 +65,20 @@ class CategoryController extends Controller
     }
 
     public function delete($id) {
-        $data = $this->category->find($id)->delete();
-        return redirect()->route('admin.categories.index');
+        try {
+            $data = $this->category->find($id)->delete();
+            return response()->json([
+                'code' => 200,
+                'message' => 'success'
+            ], 200);
+
+        } catch (\Exception $exception) {
+            log::error('Message' . $exception->getMessage() . 'Line : ' .  $exception->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'fail serve'
+            ], 500);
+        }
+
     }
 }

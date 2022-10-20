@@ -18,7 +18,7 @@
                 @csrf
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input type="text" class="login__input" name="email" placeholder="User name / Email" id="input">
+                    <input type="text" class="login__input" name="email" placeholder="Email" id="input" value="{{ old('email') }}">
                     @error('email')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

@@ -31,7 +31,8 @@
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Thêm sản phẩm</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nhập tên sản phẩm">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                       name="name" placeholder="Nhập tên sản phẩm" value="{{ old('name') }}">
                                 @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -49,7 +50,8 @@
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Giá sản phẩm</label>
-                                <input type="text" class="form-control" name="price" placeholder="Nhập giá sản phẩm">
+                                <input type="text" class="form-control" name="price"
+                                       placeholder="Nhập giá sản phẩm" value="{{ old('price') }}">
                                 @error('price')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -57,13 +59,16 @@
 
                             <div class="form-group">
                                 <label>nhập tags cho sản phẩm</label>
-                                <select class="form-control tags_select_choose" name="tags[]" multiple="multiple">
+                                <select class="form-control tags_select_choose" name="tags[]"
+                                        multiple="multiple">
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1 ">chi tiết sản phẩm</label>
-                                <textarea class="form-control tinymce_editor_init" rows="3" name="contents"></textarea>
+                                <textarea class="form-control tinymce_editor_init" rows="3" name="contents">
+                                    {{ old('contents') }}
+                                </textarea>
                                 @error('contents')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -71,7 +76,8 @@
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">mã sản phẩm</label>
-                                <input type="text" class="form-control" name="user_id" placeholder="Nhập mã sản phẩm">
+                                <input type="text" class="form-control" name="user_id"
+                                       placeholder="Nhập mã sản phẩm" value="user_id">
                             </div>
 
                             <div class="form-group">
@@ -83,9 +89,6 @@
                                 <label for="exampleInputEmail1">ảnh chi tiết sản phẩm</label>
                                 <input type="file" multiple class="form-control-file" name="image_path[]" placeholder="chọn ảnh sản phẩm">
                             </div>
-
-
-
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>

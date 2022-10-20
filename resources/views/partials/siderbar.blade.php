@@ -54,7 +54,6 @@
                     </p>
                 </a>
             </li>
-
             <li class="nav-item">
                 <a href="{{route('product.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
@@ -65,10 +64,51 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('slider.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Slider
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('user.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Danh sách nhân viên
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('roles.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Danh sách vai trò
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('permissions.create') }}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Tạo dữ liệu bảng permissions
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{route('logout')}}" class="nav-link" onclick="return confirm('Bạn có muốn đăng xuất?')">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
                         Đăng xuất
+                    </p>
+                </a>
+            </li>
+            <br>
+            <li class="nav-item">
+                <a href="{{route('setting.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Cài đặt
                     </p>
                 </a>
             </li>

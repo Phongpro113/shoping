@@ -3,6 +3,10 @@
 @section('title')
     <title>Trang chủ</title>
 @endsection
+@section('js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('admins/category/category.js') }}"> </script>
+@endsection
 
 @section('content')
     <div class="content-wrapper">
@@ -26,7 +30,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($data as $value)
+                            @foreach($category as $value)
                             <tr>
                                 <th scope="row">
                                         <p>{{$value->id}}</p>
@@ -36,13 +40,15 @@
                                 </td>
                                 <td>
                                     <a href="{{route('categories.edit', ['id' => $value->id])}}" class="btn btn-default">Edit</a>
-                                    <a href="{{route('categories.delete', ['id' => $value->id])}}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                    <a href=""
+                                       data-url="{{ route('categories.delete', ['id' => $value->id]) }}"
+                                       class="btn btn-danger action_delete">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $data->links('vendor.pagination.bootstrap-4') }}
+                        {{ $category->links('vendor.pagination.bootstrap-4') }}
                     </div>
                 </div>
             </div>
